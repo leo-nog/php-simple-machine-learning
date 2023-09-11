@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Rubix\ML\Classifiers\ClassificationTree;
+use Rubix\ML\Classifiers\RandomForest;
 use Rubix\ML\CrossValidation\Metrics\Accuracy;
 use Rubix\ML\CrossValidation\Reports\ConfusionMatrix;
 use Rubix\ML\Datasets\Labeled;
@@ -18,7 +19,7 @@ $dataset->apply(new NumericStringConverter());
 
 [$training, $testing] = $dataset->stratifiedSplit(0.8);
 
-$tree = new ClassificationTree();
+$tree = new RandomForest(new ClassificationTree());
 $tree->train($training);
 
 $predictions = $tree->predict($testing);
